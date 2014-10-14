@@ -10,6 +10,15 @@
 #package "httpd" do
 #	action :install
 #end
+
+package "munin" do
+	action :install
+end
+
+package "munin-node" do
+	action :install
+end
+
 package "php-apc" do
 	action :install
 end
