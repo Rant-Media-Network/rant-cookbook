@@ -14,19 +14,30 @@ package "php-apc" do
 	action :install
 end
 
-template "/etc/apache2/apache2.conf" do
-	source "apache2.conf.erb"
+template "/etc/php5/mods-available/apc.ini" do
+	source "apc.ini.erb"
 end
 
-template "/etc/apache2/mods-available/mpm_prefork.conf.erb" do
+link "/etc/php5/mods-available/apc.ini" do
+to "/etc/php5/apache2/conf.d" 
+end
+
+#template "/etc/apache2/apache2.conf" do
+	#source "apache2.conf.erb"
+#end
+
+template "/etc/apache2/mods-available/mpm_prefork.conf" do
 	source "mpm_prefork.conf.erb"
 end
 
-execute "a2enmod-rewrite" do
-	command "/usr/sbin/a2enmod rewrite"
-action :nothing
-only_if {node['platform_family'] == "ubuntu"}
-creates "/etc/apache2/mods-enabled rewrite.load"
+def rewrite_enable?
+	 ::File.exist?("etc/apache2/mods-enabled/rewrite.load")
+end
+
+if !rewrite_enable? then
+  bash "enable rewrite" do
+    code "a2enmod rewrite"
+  end
 end
 
 service "apache2" do
