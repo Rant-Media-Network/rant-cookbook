@@ -18,8 +18,8 @@ template "/etc/php5/mods-available/apc.ini" do
 	source "apc.ini.erb"
 end
 
-link "/etc/php5/mods-available/apc.ini" do
-to "/etc/php5/apache2/conf.d" 
+link "/etc/php5/apache2/conf.d/apc.ini" do
+to "/etc/php5/mods-available/apc.ini"
 end
 
 #template "/etc/apache2/apache2.conf" do
