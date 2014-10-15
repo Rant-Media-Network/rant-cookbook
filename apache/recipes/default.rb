@@ -19,6 +19,14 @@ package "munin-node" do
 	action :install
 end
 
+package "openssl nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-plugins-standard" do
+	action :install
+end
+
+service "nagios-nrpe-server"
+ action [:start, :enable]
+end
+
 package "php-apc" do
 	action :install
 end
