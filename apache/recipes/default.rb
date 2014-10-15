@@ -23,7 +23,7 @@ package "openssl nagios-nrpe-server nagios-plugins nagios-plugins-basic nagios-p
 	action :install
 end
 
-service "nagios-nrpe-server"
+service "nagios-nrpe-server" do
  action [:start, :enable]
 end
 
