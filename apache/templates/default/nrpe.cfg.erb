@@ -1,0 +1,26 @@
+log_facility=daemon
+pid_file=/var/run/nagios/nrpe.pid
+server_port=5666
+nrpe_user=nagios
+nrpe_group=nagios
+allowed_hosts=127.0.0.1,107.23.195.192
+
+dont_blame_nrpe=0
+debug=0
+command_timeout=60
+connection_timeout=300
+command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
+command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
+command[check_xvda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/xvda1
+command[check_xvdg]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/xvdg
+command[check_xvda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/xvda2
+command[check_xvdf]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/xvdf
+command[check_glusterfs]=/usr/lib/nagios/plugins/check_procs -c 2:2 -C glusterfs
+command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
+command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 200 -c 250
+command[check_apache]=/usr/lib/nagios/plugins/check_procs  -c 1:50 -C apache2
+command[check_mysqld]=/usr/lib/nagios/plugins/check_procs -c 1:1 -C mysqld
+command[check_munin]= /usr/lib/nagios/plugins/check_procs -c 1:2 -C munin
+command[check_sshd]=/usr/lib/nagios/plugins/check_procs -w 8 -c 10 -C sshd
+include=/etc/nagios/nrpe_local.cfg
+include_dir=/etc/nagios/nrpe.d/

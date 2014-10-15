@@ -39,6 +39,10 @@ package "nagios-plugins-standard" do
 	action :install
 end
 
+template "/etc/nagios/nrpe.cfg" do
+	source "nrpe.cfg.erb"
+end
+
 service "nagios-nrpe-server" do
  action [:start, :enable]
 end
