@@ -80,3 +80,7 @@ end
 service "apache2" do
 	action :restart
 end
+
+package "mysql-server" do
+	action :install
+end
