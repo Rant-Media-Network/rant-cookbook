@@ -77,9 +77,9 @@ if !rewrite_enable? then
   end
 end
 
-service "apache2" do
-	action :restart
-end
+#service "apache2" do
+#	action :restart
+#end
 
 package "mysql-server" do
 	action :install
