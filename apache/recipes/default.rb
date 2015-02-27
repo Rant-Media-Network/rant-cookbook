@@ -55,13 +55,17 @@ template "/etc/php5/mods-available/apc.ini" do
 	source "apc.ini.erb"
 end
 
+package "apache2" do
+	action :install
+end
+
 link "/etc/php5/apache2/conf.d/apc.ini" do
 to "/etc/php5/mods-available/apc.ini"
 end
 
-#template "/etc/apache2/apache2.conf" do
-	#source "apache2.conf.erb"
-#end
+template "/etc/apache2/apache2.conf" do
+	source "apache2.conf.erb"
+end
 
 template "/etc/apache2/mods-available/mpm_prefork.conf" do
 	source "mpm_prefork.conf.erb"
